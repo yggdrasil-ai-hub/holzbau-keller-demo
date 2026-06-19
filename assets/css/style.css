@@ -682,3 +682,18 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
   --chat--close--button--color-hover: var(--wood) !important;
   --chat--message--actions--color: var(--moss) !important;
 }
+
+/* Direkte Farbangabe für Titel/Subtitle im Header — die Vererbung der
+   Custom Property über h1/p reicht n8n-intern nicht zuverlässig durch,
+   daher hier explizit statt nur über --chat--header--color zu gehen. */
+.n8n-chat .chat-header h1,
+.chat-window .chat-header h1,
+.chat-layout .chat-header h1 {
+  color: #ffffff !important;
+}
+.n8n-chat .chat-header p,
+.chat-window .chat-header p,
+.chat-layout .chat-header p {
+  color: #ffffff !important;
+  opacity: 0.9 !important;
+}
