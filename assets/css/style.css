@@ -611,29 +611,57 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
   html { scroll-behavior: auto; }
 }
 
-/* ===== n8n Chat widget theming ===== */
+/* ===== n8n Chat widget theming =====
+   Wichtig: @n8n/chat wird erst nach DOMContentLoaded per <link> dynamisch
+   in <head> nachgeladen (siehe chat-init.js) — dadurch landet das n8n-
+   eigene Stylesheet IM DOM NACH unserem style.css und seine internen
+   :root-Defaults überschreiben unsere Werte bei gleicher Spezifität
+   (späterer Quellcode gewinnt). Deshalb hier !important: das macht
+   unser Theme unabhängig von der Ladereihenfolge. */
 :root {
-  --chat--color-primary: #7C5430;
-  --chat--color-primary-shade-50: #6a4727;
-  --chat--color-primary-shade-100: #4F3520;
-  --chat--color-secondary: #51624A;
-  --chat--color-white: #ffffff;
-  --chat--color-light: #FAF6EF;
-  --chat--color-light-shade-50: #F1E8D8;
-  --chat--color-light-shade-100: #E3D8C2;
-  --chat--color-medium: #E3D8C2;
-  --chat--color-dark: #241F1A;
-  --chat--color-disabled: #8A7D6B;
-  --chat--color-typing: #241F1A;
-  --chat--spacing: 1rem;
-  --chat--border-radius: 16px;
-  --chat--window--width: 380px;
-  --chat--window--height: 600px;
-  --chat--font-family: var(--font-body);
-  --chat--header--background: var(--wood-dark);
-  --chat--header--color: #ffffff;
-  --chat--toggle--background: var(--wood);
-  --chat--toggle--hover--background: var(--wood-dark);
-  --chat--toggle--active--background: var(--wood-dark);
-  --chat--toggle--size: 60px;
+  --chat--color-primary: #7C5430 !important;
+  --chat--color-primary-shade-50: #6a4727 !important;
+  --chat--color-primary-shade-100: #4F3520 !important;
+  --chat--color-secondary: #51624A !important;
+  --chat--color-secondary-shade-50: #3f4d3a !important;
+  --chat--color-white: #ffffff !important;
+  --chat--color-light: #FAF6EF !important;
+  --chat--color-light-shade-50: #F1E8D8 !important;
+  --chat--color-light-shade-100: #E3D8C2 !important;
+  --chat--color-medium: #E3D8C2 !important;
+  --chat--color-dark: #241F1A !important;
+  --chat--color-disabled: #8A7D6B !important;
+  --chat--color-typing: #241F1A !important;
+  --chat--spacing: 1rem !important;
+  --chat--border-radius: 16px !important;
+  --chat--transition-duration: 0.2s !important;
+  --chat--window--width: 380px !important;
+  --chat--window--height: 600px !important;
+  --chat--font-family: var(--font-body) !important;
+
+  --chat--header-height: auto !important;
+  --chat--header--padding: 1.1rem 1.2rem !important;
+  --chat--header--background: var(--wood-dark) !important;
+  --chat--header--color: #ffffff !important;
+  --chat--header--border-bottom: none !important;
+  --chat--heading--font-size: 1.15rem !important;
+  --chat--subtitle--font-size: 0.82rem !important;
+  --chat--subtitle--line-height: 1.4 !important;
+
+  --chat--message--font-size: 0.92rem !important;
+  --chat--message--padding: 0.7rem 1rem !important;
+  --chat--message--border-radius: 14px !important;
+  --chat--message-line-height: 1.5 !important;
+  --chat--message--bot--background: #ffffff !important;
+  --chat--message--bot--color: #241F1A !important;
+  --chat--message--bot--border: 1px solid #E3D8C2 !important;
+  --chat--message--user--background: var(--wood) !important;
+  --chat--message--user--color: #ffffff !important;
+  --chat--message--user--border: none !important;
+
+  --chat--toggle--background: var(--wood) !important;
+  --chat--toggle--hover--background: var(--wood-dark) !important;
+  --chat--toggle--active--background: var(--wood-dark) !important;
+  --chat--toggle--color: #ffffff !important;
+  --chat--toggle--size: 60px !important;
 }
