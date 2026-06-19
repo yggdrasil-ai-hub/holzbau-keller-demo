@@ -612,18 +612,23 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
 }
 
 /* ===== n8n Chat widget theming =====
-   Wichtig: @n8n/chat wird erst nach DOMContentLoaded per <link> dynamisch
-   in <head> nachgeladen (siehe chat-init.js) — dadurch landet das n8n-
-   eigene Stylesheet IM DOM NACH unserem style.css und seine internen
-   :root-Defaults überschreiben unsere Werte bei gleicher Spezifität
-   (späterer Quellcode gewinnt). Deshalb hier !important: das macht
-   unser Theme unabhängig von der Ladereihenfolge. */
+   Ursache des "Standard-Looks", die das vorher unwirksam gemacht hat:
+   @n8n/chat liegt aktuell in Version 1.14.0 vor (wir laden ungepinnt
+   von jsdelivr), und DIESE Version benennt ihre CSS-Variablen mit
+   DOPPELTEM Bindestrich vor "primary"/"secondary" etc.
+   (z.B. --chat--color--primary, NICHT --chat--color-primary).
+   Die alten Variablennamen unten haben deshalb nie gegriffen — es war
+   kein Lade-/Reihenfolge-Problem, sondern schlicht der falsche Name.
+   Zusätzlich kommt das @n8n/chat-Stylesheet erst nach DOMContentLoaded
+   per <link> in <head> dazu (siehe chat-init.js) und landet damit NACH
+   unserem style.css im DOM — deshalb bleibt !important nötig, damit
+   unsere Werte trotz späterer Ladereihenfolge gewinnen. */
 :root {
-  --chat--color-primary: #7C5430 !important;
-  --chat--color-primary-shade-50: #6a4727 !important;
-  --chat--color-primary-shade-100: #4F3520 !important;
-  --chat--color-secondary: #51624A !important;
-  --chat--color-secondary-shade-50: #3f4d3a !important;
+  --chat--color--primary: #7C5430 !important;
+  --chat--color--primary-shade-50: #6a4727 !important;
+  --chat--color--primary--shade-100: #4F3520 !important;
+  --chat--color--secondary: #51624A !important;
+  --chat--color-secondary-shade-50: #3A4836 !important;
   --chat--color-white: #ffffff !important;
   --chat--color-light: #FAF6EF !important;
   --chat--color-light-shade-50: #F1E8D8 !important;
@@ -637,6 +642,7 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
   --chat--transition-duration: 0.2s !important;
   --chat--window--width: 380px !important;
   --chat--window--height: 600px !important;
+  --chat--window--border: 1px solid #E3D8C2 !important;
   --chat--font-family: var(--font-body) !important;
 
   --chat--header-height: auto !important;
@@ -659,9 +665,20 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
   --chat--message--user--color: #ffffff !important;
   --chat--message--user--border: none !important;
 
+  --chat--input--background: #ffffff !important;
+  --chat--input--send--button--color: var(--moss) !important;
+  --chat--input--send--button--color-hover: var(--wood) !important;
+  --chat--input--file--button--color: var(--moss) !important;
+
   --chat--toggle--background: var(--wood) !important;
   --chat--toggle--hover--background: var(--wood-dark) !important;
   --chat--toggle--active--background: var(--wood-dark) !important;
   --chat--toggle--color: #ffffff !important;
   --chat--toggle--size: 60px !important;
+
+  --chat--footer--background: #FAF6EF !important;
+  --chat--footer--color: #8A7D6B !important;
+  --chat--footer--border-top: 1px solid #E3D8C2 !important;
+  --chat--close--button--color-hover: var(--wood) !important;
+  --chat--message--actions--color: var(--moss) !important;
 }
