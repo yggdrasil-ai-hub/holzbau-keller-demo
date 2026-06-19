@@ -697,3 +697,18 @@ section { padding: clamp(56px, 7vw, 96px) 0; }
   color: #ffffff !important;
   opacity: 0.9 !important;
 }
+
+/* Echte Bot-Antworten (vom Webhook) werden intern über eine Markdown-
+   Komponente gerendert, die eigene n8n-Design-Tokens (--color--text statt
+   unserer --chat--message--*--color) benutzt — deshalb griff die Farbe
+   bei der Begrüssung (Plain-Text), aber nicht bei echten Antworten oder
+   bei der eigenen Nutzer-Nachricht. Statt jeder internen Variable
+   nachzujagen: Text-Farbe direkt + auf alle Kind-Elemente erzwingen. */
+.chat-message.chat-message-from-user,
+.chat-message.chat-message-from-user * {
+  color: #ffffff !important;
+}
+.chat-message.chat-message-from-bot,
+.chat-message.chat-message-from-bot * {
+  color: #241F1A !important;
+}
